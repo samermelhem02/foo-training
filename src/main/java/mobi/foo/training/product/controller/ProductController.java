@@ -1,5 +1,6 @@
 package mobi.foo.training.product.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import mobi.foo.training.FooResponse;
 import mobi.foo.training.product.dto.ProductDTO;
@@ -7,15 +8,17 @@ import mobi.foo.training.product.entity.Product;
 import mobi.foo.training.product.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-;
+
 
 
 @RestController
 @RequiredArgsConstructor
+@Validated
 public class ProductController {
 
     private final ProductService productService;
@@ -42,10 +45,10 @@ public class ProductController {
     }
 
     @PostMapping("product/create")
-    public ResponseEntity<FooResponse> save(@RequestBody Product product)
+    public ResponseEntity<FooResponse> save(@Valid @RequestBody Product product)
     {
         productService.save(product);
-        System.out.println("Received Product: " + product);
+        System.out.println("Saving a product");
         ProductDTO productDTO = new ProductDTO(product.getPid(),product.getPname());
         FooResponse response = FooResponse.builder().data(productDTO).message("Created/Updated a new Product of id " + product.getPid() + " and name = " + product.getPname()).stats(true).build();
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -57,7 +60,7 @@ public class ProductController {
         ProductDTO productDTO = productService.findById(pid);
         productService.delete(pid);
 
-        FooResponse response = FooResponse.builder().data(productDTO).message("Deleted a new Product of id " + pid).stats(true).build();
+        FooResponse response = FooResponse.builder().data(productDTO).message("Deleted a Product of id " + pid).stats(true).build();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
