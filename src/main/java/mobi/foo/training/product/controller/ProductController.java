@@ -1,4 +1,6 @@
 package mobi.foo.training.product.controller;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -53,6 +55,7 @@ public class ProductController {
         FooResponse response = FooResponse.builder().data(productDTO).message("Created/Updated a new Product of id " + product.getPid() + " and name = " + product.getPname()).stats(true).build();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
 
     @DeleteMapping("product/delete/{pid}")
     public ResponseEntity<FooResponse> delete(@PathVariable long pid)

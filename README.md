@@ -1,5 +1,6 @@
 # foo-training
-This version is for exercise 3
+This version is for exercise 4
 
-# Validation 
-NotNull and Size validations were added to the product name (pname)
+# Redis Cache 
+A cache was made for the products in the findAll() method in ProductService class.
+
