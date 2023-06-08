@@ -24,9 +24,9 @@ public class ProductService {
 
 
     @Cacheable("products")
-    public List<ProductDTO> findAll()
+    public List<ProductDTO> findAllV1()
     {
-        System.out.println("Executing findAll() method logic...");
+        System.out.println("Executing findAllV1() method logic...");
         List<ProductDTO> res  = new ArrayList<>();
         List<Product> Allproducts  = new ArrayList<>();
         Allproducts = productRepository.findAll();
@@ -38,17 +38,46 @@ public class ProductService {
     }
 
 
-    public ProductDTO findById(Long id)
+    @Cacheable("products")
+    public List<ProductDTO> findAllV2()
     {
-        ProductDTO res;
-        Optional<Product> product = productRepository.findById(id);
-
-        res = new ProductDTO(product.get().getPid(), product.get().getPname());
-
+        System.out.println("Executing findAllV2() method logic...");
+        List<ProductDTO> res  = new ArrayList<>();
+        List<Product> Allproducts  = new ArrayList<>();
+        Allproducts = productRepository.findAll();
+        for(int i = 0; i < Allproducts.size() ; i++)
+        {
+            res.add(new ProductDTO(Allproducts.get(i).getPid(),Allproducts.get(i).getPname()));
+        }
         return res;
+    }
+
+
+    public ProductDTO findByIdV1(Long id)
+    {
+        List<ProductDTO> productList = this.findAllV1();
+        for (ProductDTO productDTO : productList) {
+            if (productDTO.getPid() == id) {
+                System.out.println("Executing findByIdV1");
+                return productDTO;
+            }
+        }
+        return null;
 
     }
 
+    public ProductDTO findByIdV2(Long id)
+    {
+        List<ProductDTO> productList = this.findAllV2();
+        for (ProductDTO productDTO : productList) {
+            if (productDTO.getPid() == id) {
+                System.out.println("Executing findByIdV2");
+                return productDTO;
+            }
+        }
+        return null;
+
+    }
     @CacheEvict(value = "products", allEntries = true)
     public void save(Product product)
     {

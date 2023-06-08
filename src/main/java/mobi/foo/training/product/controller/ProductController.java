@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -34,19 +35,31 @@ public class ProductController {
             @ApiResponse(responseCode = "400", description = "Invalid request payload"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    public ResponseEntity<FooResponse> findAll() {
+    public ResponseEntity<FooResponse> findAll(@RequestHeader("API-Version") String apiVersion) {
         List<ProductDTO> productDTOList;
-
-        productDTOList = productService.findAll();
+        if(apiVersion.equals("1"))
+        {
+            productDTOList = productService.findAllV1();
+        }
+        else
+        {
+            productDTOList = productService.findAllV2();
+        }
         FooResponse response = FooResponse.builder().data(productDTOList).message("Got all the products").stats(true).build();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Operation(summary = "Get a product by ID")
     @GetMapping("product/{id}")
-    public ResponseEntity<FooResponse> findById(@PathVariable long id) {
+    public ResponseEntity<FooResponse> findById(@RequestHeader("API-Version") String apiVersion,@PathVariable long id) {
         ProductDTO productDTO;
-        productDTO = productService.findById(id);
+        if(apiVersion.equals("1"))
+        {
+            productDTO = productService.findByIdV1(id);
+        } else {
+            productDTO = productService.findByIdV2(id);
+        }
+
         FooResponse response = FooResponse.builder().data(productDTO).message("Got a product by Id").stats(true).build();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -74,7 +87,7 @@ public class ProductController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     public ResponseEntity<FooResponse> delete(@PathVariable long pid) {
-        ProductDTO productDTO = productService.findById(pid);
+        ProductDTO productDTO = productService.findByIdV1(pid); //always using v1
         productService.delete(pid);
         FooResponse response = FooResponse.builder().data(productDTO).message("Deleted a Product of id " + pid).stats(true).build();
         return new ResponseEntity<>(response, HttpStatus.OK);
