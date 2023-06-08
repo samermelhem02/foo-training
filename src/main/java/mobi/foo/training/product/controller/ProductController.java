@@ -14,8 +14,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 
 @RestController
@@ -67,5 +67,16 @@ public class ProductController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("/async-task")
+    public ResponseEntity<FooResponse> performAsyncTask() throws ExecutionException, InterruptedException {
+        CompletableFuture<String> msg =  productService.AsyncTask();
+        System.out.println("This instruction is getting executed and not waiting for the above called function");
+
+        //now im gonna wait till the async function returns the msg to build my response
+        String message = msg.get();
+        FooResponse response = FooResponse.builder().message(message).stats(true).build();
+
+        return new ResponseEntity<>(response,HttpStatus.OK);
+    }
 
 }
