@@ -1,0 +1,3 @@
+ERROR m.f.t.p.controller.ProductController --- Please provide an Api-Version
+ERROR m.f.t.p.controller.ProductController --- Please provide an Api-Version
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)

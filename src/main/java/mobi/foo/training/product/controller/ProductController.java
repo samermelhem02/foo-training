@@ -19,7 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 @RestController
 @RequiredArgsConstructor
 @Validated
@@ -27,6 +28,7 @@ import java.util.concurrent.ExecutionException;
 public class ProductController {
 
     private final ProductService productService;
+    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     @Operation(summary = "Get all products")
     @GetMapping("/products")
@@ -36,6 +38,13 @@ public class ProductController {
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
     public ResponseEntity<FooResponse> findAll(@RequestHeader("API-Version") String apiVersion) {
+        if(apiVersion.equals(""))
+        {
+            logger.error("Please provide an Api-Version");
+            FooResponse response = FooResponse.builder().message("Please provide an Api-Version").stats(false).build();
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        logger.debug("Getting all the products (log)");
         List<ProductDTO> productDTOList;
         if(apiVersion.equals("1"))
         {
@@ -52,6 +61,13 @@ public class ProductController {
     @Operation(summary = "Get a product by ID")
     @GetMapping("product/{id}")
     public ResponseEntity<FooResponse> findById(@RequestHeader("API-Version") String apiVersion,@PathVariable long id) {
+
+        if(apiVersion.equals(""))
+        {
+            logger.error("Please provide an Api-Version");
+            FooResponse response = FooResponse.builder().message("Please provide an Api-Version").stats(false).build();
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
         ProductDTO productDTO;
         if(apiVersion.equals("1"))
         {
