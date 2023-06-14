@@ -1,3 +1,90 @@
 ERROR m.f.t.p.controller.ProductController --- Please provide an Api-Version
 ERROR m.f.t.p.controller.ProductController --- Please provide an Api-Version
 DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+ERROR m.f.t.p.controller.ProductController --- Please provide an Api-Version , the default api version is 2
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+WARN  m.f.t.p.controller.ProductController --- Getting all the products by default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+ERROR m.f.t.p.controller.ProductController --- Invalid API-Version: 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+DEBUG m.f.t.p.controller.ProductController --- Getting all the products (log)
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2
+WARN  m.f.t.p.controller.ProductController --- API-Version header not provided. Using default version 2

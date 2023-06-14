@@ -13,6 +13,11 @@ public class FooResponse {
     private Object data;
     private String message;
 
+    public FooResponse(){}
 
-
+    public FooResponse(boolean stats, Object data, String message) {
+        this.stats = stats;
+        this.data = data;
+        this.message = message;
+    }
 }

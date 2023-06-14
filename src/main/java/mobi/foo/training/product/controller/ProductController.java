@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import mobi.foo.training.FooResponse;
 import mobi.foo.training.product.dto.ProductDTO;
 import mobi.foo.training.product.entity.Product;
+import mobi.foo.training.product.service.ProductClientService;
 import mobi.foo.training.product.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,9 @@ import org.slf4j.LoggerFactory;
 public class ProductController {
 
     private final ProductService productService;
+
+    private  final ProductClientService productClientService;
+
     private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     @Operation(summary = "Get all products")
@@ -37,47 +41,42 @@ public class ProductController {
             @ApiResponse(responseCode = "400", description = "Invalid request payload"),
             @ApiResponse(responseCode = "500", description = "Internal server error")
     })
-    public ResponseEntity<FooResponse> findAll(@RequestHeader("API-Version") String apiVersion) {
-        if(apiVersion.equals(""))
-        {
-            logger.error("Please provide an Api-Version");
-            FooResponse response = FooResponse.builder().message("Please provide an Api-Version").stats(false).build();
-            return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<FooResponse> findAll(@RequestHeader(value = "API-Version", required = false) String apiVersion) {
+        if (apiVersion == null || apiVersion.isEmpty()) {
+            apiVersion = "2"; // Set a default value of "2"
+            logger.warn("API-Version header not provided. Using default version 2");
+        } else {
+            logger.debug("Getting all the products (log)");
         }
-        logger.debug("Getting all the products (log)");
+
         List<ProductDTO> productDTOList;
-        if(apiVersion.equals("1"))
-        {
+        if (apiVersion.equals("1")) {
             productDTOList = productService.findAllV1();
-        }
-        else
-        {
+        } else {
             productDTOList = productService.findAllV2();
         }
         FooResponse response = FooResponse.builder().data(productDTOList).message("Got all the products").stats(true).build();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @Operation(summary = "Get a product by ID")
-    @GetMapping("product/{id}")
-    public ResponseEntity<FooResponse> findById(@RequestHeader("API-Version") String apiVersion,@PathVariable long id) {
 
-        if(apiVersion.equals(""))
-        {
-            logger.error("Please provide an Api-Version");
-            FooResponse response = FooResponse.builder().message("Please provide an Api-Version").stats(false).build();
+    @Operation(summary = "Get a product by ID")
+    @GetMapping("/product/{id}")
+    public ResponseEntity<FooResponse> findById(@RequestHeader(value = "API-Version", required = false) String apiVersion, @PathVariable long id) {
+        if (apiVersion == null || apiVersion.isEmpty()) {
+            apiVersion = "2"; // Set a default value of "2"
+            logger.warn("API-Version header not provided. Using default version 2");
+        }
+
+        if (apiVersion.equals("1")) {
+            ProductDTO productDTO = productService.findByIdV1(id);
+            FooResponse response = FooResponse.builder().data(productDTO).message("Got a product by ID").stats(true).build();
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            ProductDTO productDTO = productService.findByIdV2(id);
+            FooResponse response = FooResponse.builder().data(productDTO).message("Got a product by ID").stats(true).build();
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
-        ProductDTO productDTO;
-        if(apiVersion.equals("1"))
-        {
-            productDTO = productService.findByIdV1(id);
-        } else {
-            productDTO = productService.findByIdV2(id);
-        }
-
-        FooResponse response = FooResponse.builder().data(productDTO).message("Got a product by Id").stats(true).build();
-        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Operation(summary = "Create or update a product")
@@ -120,5 +119,50 @@ public class ProductController {
         FooResponse response = FooResponse.builder().message(message).stats(true).build();
 
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @Operation(summary = "Client Get all products")
+    @GetMapping("client/products")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Products retrieved successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid request payload"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    public ResponseEntity<FooResponse> ClientFindAll(@RequestHeader(value = "API-Version", required = false) String apiVersion) {
+        return productClientService.getProducts(apiVersion);
+    }
+
+
+    @Operation(summary = "CLient Get a product by ID")
+    @GetMapping("client/product/{id}")
+    public ResponseEntity<FooResponse> ClientFindById(@RequestHeader(value = "API-Version", required = false) String apiVersion, @PathVariable long id) {
+
+
+        return productClientService.getProductById(apiVersion,id);
+    }
+
+
+    @Operation(summary = "CLient Create or update a product")
+    @PostMapping("client/product/create")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Product created/updated successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid request payload"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    public ResponseEntity<FooResponse> ClientSave(@Valid @RequestBody Product product) {
+        return productClientService.save(product);
+    }
+
+
+
+    @Operation(summary = "Client Delete a product by ID")
+    @DeleteMapping("client/product/delete/{pid}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Product deleted successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid request payload"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
+    public ResponseEntity<FooResponse> ClientDelete(@PathVariable long pid) {
+        return productClientService.deleteProduct(pid);
     }
 }
