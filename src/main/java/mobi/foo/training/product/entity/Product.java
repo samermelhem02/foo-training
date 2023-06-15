@@ -21,4 +21,8 @@ public class Product {
     private String pname;
 
 
+    public Product(long pid, @NotNull(message = "Product name is required") String pname) {
+        this.pid = pid;
+        this.pname = pname;
+    }
 }

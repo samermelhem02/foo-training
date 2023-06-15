@@ -55,27 +55,17 @@ public class ProductService {
 
     public ProductDTO findByIdV1(Long id)
     {
-        List<ProductDTO> productList = this.findAllV1();
-        for (ProductDTO productDTO : productList) {
-            if (productDTO.getPid() == id) {
-                System.out.println("Executing findByIdV1");
-                return productDTO;
-            }
-        }
-        return null;
+        Optional<Product> p = productRepository.findById(id);
+        ProductDTO  productDTO = new ProductDTO(p.get().getPid(), p.get().getPname());
+        return productDTO;
 
     }
 
     public ProductDTO findByIdV2(Long id)
     {
-        List<ProductDTO> productList = this.findAllV2();
-        for (ProductDTO productDTO : productList) {
-            if (productDTO.getPid() == id) {
-                System.out.println("Executing findByIdV2");
-                return productDTO;
-            }
-        }
-        return null;
+        Optional<Product> p = productRepository.findById(id);
+        ProductDTO  productDTO = new ProductDTO(p.get().getPid(), p.get().getPname());
+        return productDTO;
 
     }
     @CacheEvict(value = "products", allEntries = true)
